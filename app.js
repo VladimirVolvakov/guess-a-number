@@ -1,8 +1,8 @@
 // Game basic values:
 let minimum = 1;
 let maximum = 100;
-let winningNumber = 49;
-let attemptsLeft = 5;
+let winningNumber = getWinningNumber(minimum, maximum);
+let attemptsLeft = 7;
 
 // UI elements:
 const game = document.querySelector('#game');
@@ -55,13 +55,13 @@ game.addEventListener('mousedown', (event) => {
     };
 });
 
-// Function for setting messages:
+// Setting messages:
 function setMessage(messageText, color) {
     message.style.color = color;
     message.textContent = messageText;
 };
 
-// Function to show game is over:
+// Show that game is over:
 function gameOver(isGameWon, messageText) {
     let color;
     isGameWon ? color = 'green' : color = 'red';
@@ -73,4 +73,9 @@ function gameOver(isGameWon, messageText) {
     // Play again option:
     submitButton.value = 'Play again';
     submitButton.className = 'play-again';
-}
+};
+
+// Get winning number:
+function getWinningNumber(minimum, maximum) {
+    return Math.round(Math.random() * (maximum - minimum + 1));
+};
