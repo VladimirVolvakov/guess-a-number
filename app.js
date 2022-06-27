@@ -28,17 +28,11 @@ submitButton.addEventListener('click', () => {
 
     // Check if guess attempt was successful:
     if (guessAttempt === winningNumber) {
-        guessInput.disabled = true;
-        submitButton.value = 'Try one more time';
-        guessInput.style.borderColor = 'green';
-        setMessage('Congratulations! You win!', 'green');
+        gameOver(true, 'Congratulations! You win!');
     } else if (guessAttempt > winningNumber) {
         attemptsLeft = attemptsLeft - 1;
         if (attemptsLeft === 0) {
-            guessInput.disabled = true;
-            submitButton.value = 'Try one more time';
-            guessInput.style.borderColor = 'red';
-            setMessage(`You have no attempts left. Game over, you lose. The correct number was ${winningNumber}`, 'red');
+            gameOver(false, `You have no attempts left. Game over, you lose. The correct number was ${winningNumber}`);
         } else {
             guessInput.style.borderColor = 'red';
             setMessage(`Too high... But you still have ${attemptsLeft} attempts to win`, 'red');
@@ -46,10 +40,7 @@ submitButton.addEventListener('click', () => {
     } else {
         attemptsLeft = attemptsLeft - 1;
         if (attemptsLeft === 0) {
-            guessInput.disabled = true;
-            submitButton.value = 'Try one more time';
-            guessInput.style.borderColor = 'red';
-            setMessage(`You have no attempts left. Game over, you lose. The correct number was ${winningNumber}`, 'red');
+            gameOver(false, `You have no attempts left. Game over, you lose. The correct number was ${winningNumber}`)
         } else {
             guessInput.style.borderColor = 'red';
             setMessage(`Too low... But you still have ${attemptsLeft} attempts to win`, 'red');
@@ -62,3 +53,14 @@ function setMessage(messageText, color) {
     message.style.color = color;
     message.textContent = messageText;
 };
+
+// Function:
+function gameOver(isGameWon, messageText) {
+    let color;
+    isGameWon ? color = 'green' : color = 'red';
+
+    guessInput.disabled = true;
+    submitButton.value = 'Try one more time';
+    guessInput.style.borderColor = color;
+    setMessage(messageText, color);
+}
