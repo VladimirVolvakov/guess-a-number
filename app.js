@@ -48,6 +48,13 @@ submitButton.addEventListener('click', () => {
     };
 });
 
+// Add event listener for submitButton.play-again:
+game.addEventListener('mousedown', (event) => {
+    if (event.target.classList.contains('play-again')) {
+        window.location.reload();
+    };
+});
+
 // Function for setting messages:
 function setMessage(messageText, color) {
     message.style.color = color;
@@ -60,7 +67,10 @@ function gameOver(isGameWon, messageText) {
     isGameWon ? color = 'green' : color = 'red';
 
     guessInput.disabled = true;
-    submitButton.value = 'Try one more time';
     guessInput.style.borderColor = color;
     setMessage(messageText, color);
+
+    // Play again option:
+    submitButton.value = 'Play again';
+    submitButton.className = 'play-again';
 }
