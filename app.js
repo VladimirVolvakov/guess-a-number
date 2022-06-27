@@ -33,14 +33,32 @@ submitButton.addEventListener('click', () => {
         guessInput.style.borderColor = 'green';
         setMessage('Congratulations! You win!', 'green');
     } else if (guessAttempt > winningNumber) {
-        
+        attemptsLeft = attemptsLeft - 1;
+        if (attemptsLeft === 0) {
+            guessInput.disabled = true;
+            submitButton.value = 'Try one more time';
+            guessInput.style.borderColor = 'red';
+            setMessage(`You have no attempts left. Game over, you lose. The correct number was ${winningNumber}`, 'red');
+        } else {
+            guessInput.style.borderColor = 'red';
+            setMessage(`Too high... But you still have ${attemptsLeft} attempts to win`, 'red');
+        };
     } else {
-        
-    }
+        attemptsLeft = attemptsLeft - 1;
+        if (attemptsLeft === 0) {
+            guessInput.disabled = true;
+            submitButton.value = 'Try one more time';
+            guessInput.style.borderColor = 'red';
+            setMessage(`You have no attempts left. Game over, you lose. The correct number was ${winningNumber}`, 'red');
+        } else {
+            guessInput.style.borderColor = 'red';
+            setMessage(`Too low... But you still have ${attemptsLeft} attempts to win`, 'red');
+        };
+    };
 });
 
 // Function for setting messages:
 function setMessage(messageText, color) {
     message.style.color = color;
     message.textContent = messageText;
-}
+};
