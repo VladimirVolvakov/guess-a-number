@@ -54,7 +54,7 @@ function setMessage(messageText, color) {
     message.textContent = messageText;
 };
 
-// Function:
+// Function to show game is over:
 function gameOver(isGameWon, messageText) {
     let color;
     isGameWon ? color = 'green' : color = 'red';
