@@ -1,7 +1,7 @@
 // Game basic values:
 let minimum = 1;
 let maximum = 100;
-let winningNumber = 2;
+let winningNumber = 49;
 let attemptsLeft = 5;
 
 // UI elements:
@@ -11,3 +11,36 @@ const maxNumber = document.querySelector('.max-number');
 const guessInput = document.querySelector('#guess-input');
 const submitButton = document.querySelector('#submit-button');
 const message = document.querySelector('.message');
+
+// Set text content of minimal and maximal number limits:
+minNumber.textContent = minimum;
+maxNumber.textContent = maximum;
+
+// Add event listener for submit button:
+submitButton.addEventListener('click', () => {
+    // Convert type of input data from string to number:
+    let guessAttempt = +guessInput.value;
+
+    // Validation of value:    
+    if (guessAttempt < minimum || guessAttempt > maximum) {
+        setMessage(`Your number is outside of a range. Please enter a number between ${minimum} and ${maximum}`, 'red');
+    }
+
+    // Check if guess attempt was successful:
+    if (guessAttempt === winningNumber) {
+        guessInput.disabled = true;
+        submitButton.value = 'Try one more time';
+        guessInput.style.borderColor = 'green';
+        setMessage('Congratulations! You win!', 'green');
+    } else if (guessAttempt > winningNumber) {
+        
+    } else {
+        
+    }
+});
+
+// Function for setting messages:
+function setMessage(messageText, color) {
+    message.style.color = color;
+    message.textContent = messageText;
+}
